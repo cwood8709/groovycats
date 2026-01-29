@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groovy Cats - A Grateful Dead Fan's Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(45deg, #ff6b6b 0%, #feca57 15%, #48dbfb 30%, #ff9ff3 45%, #54a0ff 60%, #00d2d3 75%, #ff6348 90%, #ffa502 100%);
+            background-size: 400% 400%;
+            animation: tiedye 15s ease infinite;
+            min-height: 100vh;
+        }
+
+        @keyframes tiedye {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 50% 50%; }
+            50% { background-position: 100% 50%; }
+            75% { background-position: 50% 100%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        nav {
+            background: linear-gradient(135deg, #ee5a6f 0%, #f29263 25%, #feca57 50%, #48dbfb 75%, #ff6348 100%);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border-bottom: 3px solid #333;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            transition: transform 0.3s;
+        }
+
+        nav a:hover {
+            transform: scale(1.1) rotate(-2deg);
+        }
+
+        .skull {
+            font-size: 1.5rem;
+            animation: spin 4s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            border: 3px solid #ff6348;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #ff6348;
+            font-size: 2rem;
+            margin: 2rem 0 1rem;
+            text-decoration: underline wavy #feca57;
+        }
+
+        h3 {
+            color: #48dbfb;
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .cat-icon {
+            font-size: 5rem;
+            margin: 1rem 0;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .breed-info {
+            background: linear-gradient(135deg, #feca57 0%, #ff9ff3 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid #ff6348;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+        }
+
+        .characteristics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .char-item {
+            background: linear-gradient(135deg, #ee5a6f 0%, #f29263 50%, #feca57 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid #333;
+            box-shadow: 3px 3px 8px rgba(0,0,0,0.3);
+        }
+
+        .char-item strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        ul {
+            margin: 1rem 0 1rem 2rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .quote {
+            font-style: italic;
+            text-align: center;
+            font-size: 1.2rem;
+            margin: 2rem 0;
+            padding: 1rem;
+            background: rgba(255, 215, 0, 0.3);
+            border-left: 4px solid #ff6348;
+            border-right: 4px solid #48dbfb;
+        }
+
+        .peace-sign {
+            display: inline-block;
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><span class="skull">☮️</span></li>
+            <li><a href="#" onclick="showPage('home')">Home</a></li>
+            <li><a href="#" onclick="showPage('mainecoon')">Maine Coons</a></li>
+            <li><a href="#" onclick="showPage('bombay')">Bombay Cats</a></li>
+            <li><span class="skull">🌹</span></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <div class="hero">
+                <div class="cat-icon">🐱✨</div>
+                <h1>Groovy Cats: A Long Strange Trip Through Feline Friends</h1>
+            </div>
+            
+            <div class="quote">
+                "Once in a while you get shown the light, in the strangest of places if you look at it right." - Jerry Garcia
+            </div>
+
+            <p>Welcome, fellow Deadheads and cat lovers! Just like following the Grateful Dead on tour, sharing your life with a cat is a journey of discovery, connection, and unconditional love. These mystical creatures have been dancing through human history for thousands of years, spreading peace, love, and purrs wherever they go.</p>
+
+            <h2>Cats: The Ultimate Free Spirits <span class="peace-sign">☮️</span></h2>
+            <p>Cats embody the spirit of freedom that Jerry Garcia and the Dead celebrated in their music. They're independent souls who march to the beat of their own drum, yet they choose to share their cosmic energy with us. Like a perfectly improvised "Dark Star," every moment with a cat is unique and unrepeatable.</p>
+
+            <p>These furry philosophers remind us to stay present, enjoy the simple pleasures (a sunny spot, a good stretch, a tasty meal), and never take ourselves too seriously. They're the perfect companions for anyone who believes in living authentically and following their own path.</p>
+
+            <h2>A Kaleidoscope of Cat Breeds</h2>
+            <p>Just as the Grateful Dead's music was a tapestry of blues, folk, rock, jazz, and psychedelia, the world of cats is a beautiful mosaic of different breeds, each bringing their own special vibe. Some cats are like "Truckin'" - steady, reliable, and always there for you. Others are more like "Fire on the Mountain" - wild, unpredictable, and full of energy.</p>
+
+            <div class="breed-info">
+                <h3>Our Featured Groovy Cats 🌈</h3>
+                <p><strong>Maine Coons</strong> are the "Uncle John's Band" of cats - big-hearted, gentle, and always ready to jam with the family. These gentle giants have the laid-back vibe of a perfect summer festival.</p>
+                <p><strong>Bombay Cats</strong> are like "Touch of Grey" - sleek, mysterious, with a touch of darkness that only makes them more beautiful. These miniature panthers will steal your heart faster than a Jerry guitar solo.</p>
+            </div>
+
+            <p>So grab your tie-dye, put on some Dead tunes, and let's explore these far-out feline friends. As Jerry would say, "What a long, strange trip it's been" - and it's even better with cats! 🎸🐾</p>
+        </div>
+
+        <!-- Maine Coon Page -->
+        <div id="mainecoon" class="page">
+            <h1>Maine Coon Cats: The Gentle Giants of Shakedown Street</h1>
+            <div class="cat-icon" style="text-align: center;">🦁🌈</div>
+
+            <div class="quote">
+                "The music never stopped" - and neither does the love of a Maine Coon
+            </div>
+
+            <p>If cats had a "Wall of Sound," the Maine Coon would be cranking it up! These magnificent felines are the Jerry Garcias of the cat world - big, lovable, legendary, and with an unmistakable presence. Just like Jerry's guitar playing, Maine Coons have a way of making everyone around them feel good.</p>
+
+            <p>Maine Coons are native to the snowy Northeast, just like the Dead got their start in San Francisco - both products of their environment that went on to touch hearts worldwide. These cats embody the communal spirit of a Grateful Dead concert: friendly, welcoming, and always ready to make new friends.</p>
+
+            <h2>Physical Characteristics: A Festival-Sized Cat</h2>
+            <div class="characteristics">
+                <div class="char-item">
+                    <strong>Size</strong>
+                    <span>13-18 pounds (females)<br>15-25 pounds (males)<br>That's one big kitty!</span>
+                </div>
+                <div class="char-item">
+                    <strong>Length</strong>
+                    <span>Up to 40 inches<br>Longer than a guitar!</span>
+                </div>
+                <div class="char-item">
+                    <strong>Lifespan</strong>
+                    <span>12-15 years<br>Many tours together!</span>
+                </div>
+                <div class="char-item">
+                    <strong>Coat</strong>
+                    <span>Long, flowing<br>Like tie-dye fur!</span>
+                </div>
+            </div>
+
+            <p>Their luxurious coats come in as many colors as a tie-dye shirt - tabby patterns, solid colors, calicos, and everything in between. Those tufted ears? Think of them as nature's version of a groovy headband. And their bushy tails wave like Dancing Bears at a show!</p>
+
+            <h2>Personality: The "Touch of Grey" Temperament</h2>
+            <p>Maine Coons are the ultimate "good vibes only" cats. They're like that friend who showed up at your first Dead show and made you feel instantly welcome. These cats have dog-like loyalty and will follow you from room to room, not because they need you, but because they genuinely enjoy your company - just like Deadheads traveling together on tour.</p>
+
+            <div class="breed-info">
+                <h3>Key Groovy Traits</h3>
+                <ul>
+                    <li><strong>Social Butterflies:</strong> They're the Deadheads of cats - love everybody!</li>
+                    <li><strong>Intelligent:</strong> Quick learners, like memorizing setlists</li>
+                    <li><strong>Playful Forever:</strong> Keep that kitten energy well into their golden years</li>
+                    <li><strong>Vocal Musicians:</strong> Chirp and trill instead of meow - their own "acoustic set"</li>
+                    <li><strong>Easy-Going:</strong> Adaptable to any scene, man</li>
+                    <li><strong>Water Lovers:</strong> Unlike most cats, they dig water - total free spirits!</li>
+                </ul>
+            </div>
+
+            <h2>Care: Keeping the Music Playing</h2>
+            <p>Taking care of a Maine Coon is like maintaining Jerry's guitars - it requires regular attention but the payoff is beautiful. Brush that magnificent coat several times a week to keep it flowing and fabulous. Think of it as your meditation time together, like listening to a mellow "Ripple" on a Sunday morning.</p>
+
+            <p>These cats need space to roam and explore - they're not meant to be cooped up like a studio recording. Give them tall cat trees to climb (their "stage"), interactive toys (their "instruments"), and plenty of room to express themselves. A Maine Coon in full play mode is like watching the band jam - pure joy and improvisation!</p>
+
+            <p>Feed them quality food, keep up with vet visits, and shower them with love. In return, you'll get a companion who's there for you through every high and low, just like the music of the Grateful Dead. ☮️</p>
+        </div>
+
+        <!-- Bombay Page -->
+        <div id="bombay" class="page">
+            <h1>Bombay Cats: Black Panthers of the "Dark Star"</h1>
+            <div class="cat-icon" style="text-align: center;">🐈‍⬛✨</div>
+
+            <div class="quote">
+                "In the shadow of the moon, she danced in the starlight" - and so does the Bombay cat
+            </div>
+
+            <p>The Bombay cat is like a perfectly executed "Dark Star" - mysterious, mesmerizing, and absolutely unforgettable. These sleek black beauties are the embodiment of cosmic cool, with their patent-leather coats shining like a spotlight on stage and eyes that glow like amber sunsets at a summer festival.</p>
+
+            <p>Created in the 1950s (the same era that would later birth the psychedelic revolution), Bombay cats were bred to look like miniature black panthers. But don't let their wild appearance fool you - these cats are pure love and affection, like finding your tribe at a Dead show.</p>
+
+            <h2>Physical Characteristics: Pure Velvet Vibes</h2>
+            <div class="characteristics">
+                <div class="char-item">
+                    <strong>Size</strong>
+                    <span>6-11 pounds<br>Compact but mighty!</span>
+                </div>
+                <div class="char-item">
+                    <strong>Build</strong>
+                    <span>Sleek & muscular<br>Like a dancer!</span>
+                </div>
+                <div class="char-item">
+                    <strong>Lifespan</strong>
+                    <span>12-16 years<br>Years of groovy times!</span>
+                </div>
+                <div class="char-item">
+                    <strong>Coat</strong>
+                    <span>Black as midnight<br>Shiny as a new vinyl!</span>
+                </div>
+            </div>
+
+            <p>That jet-black coat isn't just black - it's EVERYTHING black. It's the black of a moonless night at a campground show, the black of a vintage concert tee, the black of the spaces between the notes in a Jerry solo. And those copper or gold eyes? They're like the warm glow of stage lights cutting through the darkness, mesmerizing and full of soul.</p>
+
+            <h2>Personality: "Sugar Magnolia" Sweet</h2>
+            <p>If Maine Coons are the social butterflies of Shakedown Street, Bombay cats are your ride-or-die tour buddies who never leave your side. These cats are velcro kitties - they'll be on your lap, on your shoulder, or snuggled under your tie-dye blanket faster than you can say "estimated prophet."</p>
+
+            <div class="breed-info">
+                <h3>Far Out Characteristics</h3>
+                <ul>
+                    <li><strong>Ultimate Love Bugs:</strong> They're all about peace, love, and purrs</li>
+                    <li><strong>People-Powered:</strong> Need human connection like a band needs an audience</li>
+                    <li><strong>Smart Cookies:</strong> Learn quickly and love interactive play</li>
+                    <li><strong>Family Friendly:</strong> Good with kids, other cats, even dogs - total harmony!</li>
+                    <li><strong>Talkative:</strong> Will chat with you in soft, pleasant tones</li>
+                    <li><strong>Heat Seekers:</strong> Love warmth like Deadheads love summer tour</li>
+                    <li><strong>Lap Champions:</strong> Olympic-level cuddlers</li>
+                </ul>
+            </div>
+
+            <h2>Care: Easy as "Ripple"</h2>
+            <p>Caring for a Bombay is as easy as swaying to an acoustic set. Their short coat needs just a weekly brush to keep it shining like a freshly waxed tour bus. They're generally healthy cats, though watch their weight - these cats love food as much as Deadheads love a good veggie burrito!</p>
+
+            <p>The most important thing about Bombay cats? They NEED companionship. Leaving a Bombay alone too long is like going to a Dead show by yourself - technically possible, but you're missing the whole point! If you're gone a lot, consider getting two cats so they can keep each other company. They're also great with other pets, spreading the love around like sharing your cookies in the lot.</p>
+
+            <h2>Living the Dream with a Bombay</h2>
+            <p>Whether you're in a van down by the river or a suburban house with a white picket fence, a Bombay cat will adapt and thrive as long as you're there. They're perfect for anyone who values deep connections and believes in the power of love.</p>
+
+            <p>These cats will curl up with you while you listen to vintage Dead tapes, sleep under your tie-dye comforter, and follow you around like a shadow made of pure affection. They're proof that sometimes the darkest exteriors hide the brightest souls - a lesson Jerry and the boys taught us through decades of music.</p>
+
+            <p>As the Dead sang, "Let it grow, let it grow, greatly yield" - and with a Bombay cat, the love just keeps growing. 🌹🐾✨</p>
+        </div>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
